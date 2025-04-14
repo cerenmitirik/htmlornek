@@ -1,0 +1,247 @@
+*{
+    padding:0;
+    margin:0;
+    border:none;
+   text-decoration:none;
+   list-style:none;
+}
+
+*:focus{
+outline:0;/*üstüne geldiğimizde örneğin search siyah kutu çıkardı artık çıkmayacak*/
+}
+
+html,body{
+    height:100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.chats{
+    height:100%;
+    display:flex; /*sidebar ve contentin yan yana olmasını sağlar*/
+}
+.chats .sidebar{
+ width:300px;
+ min-width:300px; /* minimum bu azalmaması için sabit tutuyo sadece content bölümü azalır*/
+ background: #f5f5f5;
+ display:flex; /*ÖNEMLİ bunu dediğimde searchle contactsi yan yana yazar alt alta gelmesini istediğim için yön belirtmem lazım*/
+ flex-direction:column; /*bunu da ekleyince yukarıdan aşağı gezmek için çubuk geldu VE 
+ daha sonraki adımda contacts bölümünde overflow auto yazdığımda gelen mesajların hepsini borderda renklendirir içine alır yani ve çubukla gezdirir */
+}
+
+.chats .sidebar .search{
+    height:50px;
+    min-height:50px;/*bunu eklemezsen alttaki kutunun yüksekliği kaplıyor boşuk kalmıyo*/
+    border-bottom: 1px solid #ddd; /* alt sınıra çizgi çekti*/
+    position:relative; /*position absolute kullandığımda i bunun dışına çıkmayacak top right kullandığımızda yazdık eğer yazmasaydık sayfanı en sağına giderdi*/ 
+    padding:0 10px; /*soldan sağdan 15px*/
+    display:flex;
+    align-items:center; /* yukarıdan aşağıdan ortaladı */
+}
+.chats .sidebar .search input{
+    width:100%;
+    height:30px;
+    background: #fff;
+    border-radius:25px;/*yanlardan oval verir*/
+    font-size:15px;
+    padding:0 35px 0 15px; /*ara yazısını soldan 15px sağdan en son 15px yazmaya devam ettiğinde boşuk bırakır */
+}
+.chats .sidebar .search i{
+    position:absolute;/* havada tutuyprum*/
+    top:0;
+    right:0;
+    width:37px;
+    height:50px;
+    display:flex;
+    align-items:center;
+    font-size:14px;
+    color:gray;
+}
+
+.chats .sidebar .contacts {
+overflow: auto;
+}
+
+.chats .sidebar .contacts ul li a {
+display:flex; /*resim ve kişinin adı ve attığı mesaj yan yana gelir */
+height:80px; /* kişiler mesajlar bölümü arası yükseklik başkalarıyla*/
+align-items:center; /*ortalar 80px i */
+padding:0 10px; /* o kişinin mesaj kutusu tamamen sağdan soldan iç boşluk*/
+} 
+
+.chats .sidebar .contacts ul li a:hover{
+    background: #fff;
+}
+
+.chats .sidebar .contacts ul li.active a{ /*mesaj kutusunun üstüne geldiğinde beyaz yap*/
+    background:#fff;
+}
+
+.chats .sidebar .contacts ul li a img{
+    width:60px;
+    height:60px;
+    border-radius:60px;
+    margin-right:10px; /*resimle yazı arası boşluk koydu*/
+}
+
+.chats .sidebar .contacts ul li a .contact .name{
+    font-size:18px;
+    color:black;
+    font-weight:500; /*kalınlık*/ 
+}
+.chats .sidebar .contacts ul li a .contact .message{
+    font-size:15px;
+    color:gray;
+    font-weight:200px; 
+    margin-bottom:2px;/*kişiyle masajı arası boşluk*/
+}
+
+.chats .sidebar .contacts ul li a .notification{
+   width:18px;
+   height:18px;
+   border-radius:50%;
+   background:red;
+   font-size:11px;
+   color: #fff;
+   text-align:center; /*yazıyı 18px de ortalar */
+   line-height:17px;
+   margin-left: auto; /*en sağa yasladı VE flex kullandoğımızda işe yarar A etiketinde flex kullandığımız için boşluk otomatik hesaplanır */
+}
+
+
+.chats .content{
+    flex:1; /*content kalan genişiliğe doldu yan yana*/
+    border-left:1px solid #ddd; /*sol tarafa çizgi attı*/
+   display:flex; /*alt alta olması için bundan sonrası*/
+   flex-direction: column;
+}
+.chats .content .message-header{
+    height:50px;
+    min-height: 50px;
+    border-bottom: 2px solid #ddd; /*altta kenarlık*/
+    display:flex;
+    justify-content:space-between; /*2 tane ana div yani user info ve acition birisi sağa birisi sola yaslanır*/
+  align-items:center;/* içredeki her şeyi ortaladı*/
+  padding:0 5px 0 15px;
+}
+.chats .content .message-header .user-info{
+    display:flex;
+    align-items:center; /*resimle yazıları ortaladı*/
+
+}
+.chats .content .message-header .user-info img {
+width:40px;
+height:40px;
+border-radius:50%;
+margin-right:10px;
+}
+.chats .content .message-header .user-info .user .name{
+    font-size:15px;
+    font-weight:500;
+    color:black;
+
+}
+.chats .content .message-header .user-info .user .time{
+    font-size:13px;
+    font-weight:300;
+    color: #999;
+    
+}
+.chats .content .message-header .action ul{ /*lilerim ul içinde sadece action yazıp bıraksaydım yan yana gelmezlerdi çünkü actionun altında bir eleman daha var*/
+    display:flex;
+}
+
+.chats .content .message-header .action ul li a{
+    font-size:20px;
+    color: #999;
+    width:30px;
+    display:block; /*bu olmasaydı boşuklara tıkladığımızda algılayıp basmazdı ama bu olunca 30px de algıladğı yerlere basınca da açar*/
+    text-align:center;
+}
+.chats .content .message-header .action ul li a:hover{
+    color:black;
+}
+ 
+.chats.content.message-content::before{
+    content:'';
+    margin-bottom:auto;} /* ÖNEMLİ yazıların aşağı inmesi için*/
+
+.chats .content .message-content{ /*orta kısımdaki alanı kendine göre ayarladı ve aşağıya inmesini desağladi en altın*/
+    flex:1;/*şu an uzunluğu yüzde yüz altta align self flex start yağtığında mesaj genişiliği kadar olur*/
+    display:flex;
+    flex-direction:column;
+    padding: 15px;
+   overflow: auto; /*ÖNEMLİ sohbet kısmının çubukla inmesi*/
+}
+
+.chats .content .message-content .message {
+    align-self:flex-start;/*bailangıçta kal genişliğin kadar*/
+    margin-bottom:20px;/*2 mesaj arası uzaklığı açar*/
+
+}
+.chats .content .message-content .message .bubble{ /*2 mesaja işlem yapar*/
+    padding:6px 12px;
+    background:#f7f7f7;
+    border-radius: 20px;
+    font-size:16px;
+    margin-bottom:5px; /*mesajla dakika arası boşluk*/
+
+}
+
+.chats .content .message-content .message .time{
+    font-size:12px;
+    color:#999;
+
+}
+.chats .content .message-content .message.me {
+    align-self:flex-end;
+}
+.chats .content .message-content .message.me .bubble{
+    background:#2196f3;
+    color:white;
+
+}
+.chats .content .message-content .message.me .time{
+    text-align:right;
+}
+.chats .content .message-form {
+    border-top: 1px solid #ddd;
+    background:#eee;
+    padding:10px;/*li lerin arasında marginleri 5 olduğu için 10+5 boşluk olur*/
+}
+.chats .content .message-form ul{
+    display:flex;
+}
+.chats .content .message-form ul li{
+    margin:0 5px;
+}
+.chats .content .message-form ul li.input{/*ikonları ayırarak koydu sona başa???*/
+    flex:1;
+}
+.chats .content .message-form ul li.input input{
+    width:100%;/*text olan yeri büyütür +32 yazmamızın nedeni padding 15 ler ve 1 erden border yazdık yoksa taşar*/
+    box-sizing:border-box; /*bu 32px taşmayı engellemek için yaz*/
+    height:36px;
+    border:1px solid #ddd;
+    border-radius:36px;
+    font-size:15px;
+    padding:0 15px;
+}
+.chats .content .message-form ul li a {
+    width:36px;
+    height: 36px;
+    display: block; /*36px alandaki boşuklara tklayınca algılaması için*/
+    border-radius:50%;
+    background: black;
+    color:white;
+    text-align: center;
+    line-height: 36px;
+}
+.chats .content .message-form ul li.emoji-btn a{
+    background:#339af0;
+}
+.chats .content .message-form ul li.sound-btn a{
+    background:red;
+}
+.chats .content .message-form ul li.image-btn a{
+    background:#4caf50;
+}
